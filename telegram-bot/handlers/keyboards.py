@@ -14,7 +14,7 @@ async def kb_start():
     return keyboard
 
 
-async def kb_task():
+async def kb_menu():
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     tasks = types.KeyboardButton(text="Получить список задач")
     keyboard.add(tasks)
