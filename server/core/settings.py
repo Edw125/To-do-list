@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'drf_spectacular',
     'drf_api_logger',
     'authentication',
@@ -112,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = config("TIMEZONE", default="UTC")
+TIME_ZONE = config("DJANGO_TIMEZONE", default="UTC")
 
 USE_I18N = True
 

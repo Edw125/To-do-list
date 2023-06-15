@@ -23,5 +23,19 @@ services:
     env_file:
       - .env
 
+  telegram_bot:
+    container_name: telegram_bot
+    build:
+      context: ./telegram-bot
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - postgres
+      - server
+    env_file:
+      - .env
+
+
 volumes:
   postgres_data:
