@@ -5,7 +5,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 
 from handlers import keyboards
-from handlers.endpoints import get_access_token
+from handlers.endpoints import get_access_token, get_task_list
 from states import Auth, Menu
 
 
@@ -63,8 +63,23 @@ async def authorize_step_3(message: types.Message, state: FSMContext):
     )
 
 
-async def menu(message: types.Message, state: FSMContext):
-    pass
+async def tasks(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    result = await get_task_list(data.get("jwt_token"))
+    if result:
+        string = ""
+        for task in result:
+            string += f"id: {task.get('id')}, title: {task.get('title')[:50]}, " \
+             f"desc: {task.get('description')[:100]}, status: {task.get('status')}\n"
+        await message.answer(
+            "Список задач: \n" + string,
+            parse_mode="Markdown",
+        )
+    else:
+        await message.answer(
+            "Не удалось получить список задач",
+            parse_mode="Markdown",
+        )
 
 
 async def logout(message: types.Message, state: FSMContext):
@@ -83,4 +98,4 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(authorize_step_1, Text(equals="Авторизоваться", ignore_case=True), state="*")
     dp.register_message_handler(authorize_step_2, state=Auth.username)
     dp.register_message_handler(authorize_step_3, state=Auth.password)
-    dp.register_message_handler(menu, state=Menu.all_states)
+    dp.register_message_handler(tasks, Text(equals="Получить список задач", ignore_case=True), state=Menu.all_states)
