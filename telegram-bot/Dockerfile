@@ -6,4 +6,4 @@ COPY . .
 
 RUN pip install -r requirements.txt --no-cache-dir
 
-ENTRYPOINT ["python", "runner.py", "-test"]
+ENTRYPOINT ["python", "runner.py", "-m", "test"]

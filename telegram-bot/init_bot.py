@@ -18,11 +18,13 @@ WEBHOOK_HOST = os.getenv("WEBHOOK_HOST")
 WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 WEBAPP_HOST = os.getenv("WEBAPP_HOST")
 WEBAPP_PORT = os.getenv("WEBAPP_PORT")
+SERVER_HOST = os.getenv("SERVER_HOST")
 
 
 async def set_commands(bot: Bot):
     commands = [
         BotCommand(command="/start", description="Начать"),
+        BotCommand(command="/logout", description="Выйти"),
     ]
     await bot.set_my_commands(commands)
 

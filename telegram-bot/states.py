@@ -8,3 +8,6 @@ class Auth(StatesGroup):
 
 class Menu(StatesGroup):
     jwt_token = State()
+    delete_task = State()
+    update_task = State()
+    create_task = State()

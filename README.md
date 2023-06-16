@@ -21,23 +21,23 @@ git clone git@github.com:Edw125/To-do-list.git
 cd To-do-list
 ```
 * Установите Docker
-* Отредактируйте или создайте файл `.env` в root.
+* Отредактируйте или создайте файл `.env` в root. Добавьте в него `TELEGRAM_TOKEN`
 * Параметры запуска описаны в файлах `docker-compose.yml` которые находятся в корне.
 * Запустите docker compose:
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 * Создайте миграции:
 ```bash
-docker-compose exec backend python manage.py makemigrations
+docker compose exec server python manage.py makemigrations
 ```
 * Примените миграции:
 ```bash
-docker-compose exec backend python manage.py migrate
+docker compose exec server python manage.py migrate
 ```
 * Перед тем, как войти в админ-панель, нужно создать суперпользователя командой:
 ```bash
-docker-compose exec backend python manage.py createsuperuser
+docker compose exec server python manage.py createsuperuser
 ```
 ## Доступ к админ-зоне
 * Доступ к админ-зоне можно получить тут:
